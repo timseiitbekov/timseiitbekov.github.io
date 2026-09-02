@@ -129,7 +129,7 @@
   }
 
   @media (max-width: 640px){
-    section{ grid-template-columns: 1fr; padding: 48px 0; }
+    section{ grid-template-columns: 1fr; padding: 48px 20px; }
     .rail{ display: none; }
   }
 
@@ -168,6 +168,9 @@
     gap: 28px;
     min-width: 0;
     overflow-x: auto;
+    overflow-y: hidden;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   nav::-webkit-scrollbar{ display: none; }
@@ -306,6 +309,11 @@
     color: var(--text);
   }
   .btn--ghost:hover{ border-color: var(--signal); }
+
+  @media (max-width: 560px){
+    .cta-row{ flex-direction: column; align-items: stretch; }
+    .btn{ justify-content: center; }
+  }
 
   /* load-in sequence: a single orchestrated moment, hero only */
   .about-inner .name,
@@ -527,12 +535,6 @@
   /* ============================================================
      CONTACT
      ============================================================ */
-  .contact-intro{
-    max-width: 52ch;
-    color: var(--muted);
-    margin-bottom: 28px;
-    font-size: 15px;
-  }
   .contact-grid{
     display: flex;
     flex-wrap: wrap;
@@ -657,7 +659,6 @@
     <div class="rail"><span id="railContact"></span></div>
     <div>
       <h2 class="heading" id="contactHeading"></h2>
-      <p class="contact-intro" id="contactIntro"></p>
       <div class="contact-grid" id="contactGrid"></div>
     </div>
   </section>
@@ -690,11 +691,11 @@ const CONTENT = {
     rail: { about: "about", stack: "stack", projects: "projects", experience: "experience", background: "background", contact: "contact" },
 
     name: "Tim Seiitbekov",
-    role: "SDET | QA Automation Engineer",
+    role: "SDET / QA Automation Engineer",
     location: "Kyrgyzstan · Remote",
     experienceYears: "5+ years",
 
-    bio: "SDET | QA Automation Engineer with 5+ years across fintech and e-commerce - from algorithmic trading platforms to banking systems. I build test automation infrastructure from the ground up, scale QA practices in high-stakes environments, and mentor the engineers who keep it running.",
+    bio: "SDET / QA Automation Engineer with 5+ years across fintech and e-commerce - from algorithmic trading platforms to banking systems. I build test automation infrastructure from the ground up, scale QA practices in high-stakes environments, and mentor the engineers who keep it running.",
 
     stats: [
       { value: "30–35%", label: "lower bug escape rate" },
@@ -812,7 +813,6 @@ const CONTENT = {
     ],
 
     contactHeading: "Get in touch",
-    contactIntro: "Reach out about AQA / SDET roles, or automation projects in fintech and e-commerce.",
     contacts: [
       { label: "telegram", value: "@tim_kgnz", url: "https://t.me/tim_kgnz" },
       { label: "email", value: "tim.kgnz@gmail.com", url: "mailto:tim.kgnz@gmail.com" },
@@ -838,11 +838,11 @@ const CONTENT = {
     rail: { about: "обо мне", stack: "стек", projects: "проекты", experience: "опыт", background: "образование", contact: "контакты" },
 
     name: "Tim Seiitbekov",
-    role: "SDET | QA Automation Engineer",
+    role: "SDET / QA Automation Engineer",
     location: "Кыргызстан · Удалённо",
     experienceYears: "5+ лет",
 
-    bio: "Старший инженер по автоматизации тестирования (SDET | QA Automation Engineer) с опытом более 5 лет в финтехе и электронной коммерции - от платформ алгоритмической торговли до банковских систем. Строю тестовую инфраструктуру с нуля, масштабирую практики QA в средах с высокими требованиями к надёжности и наставляю инженеров, которые всё это поддерживают.",
+    bio: "Senior QA automation инженер с опытом более 5 лет в финтехе и e-commerce - от платформ алгоритмической торговли до банковских систем. Строю тестовую инфраструктуру с нуля, масштабирую практики QA в средах с высокими требованиями к надёжности и наставляю инженеров, которые всё это поддерживают.",
 
     stats: [
       { value: "30-35%", label: "снижение доли пропущенных дефектов" },
@@ -960,7 +960,6 @@ const CONTENT = {
     ],
 
     contactHeading: "Связаться",
-    contactIntro: "Пишите по вопросам AQA / SDET вакансий или проектов автоматизации в финтехе и e-commerce.",
     contacts: [
       { label: "telegram", value: "@tim_kgnz", url: "https://t.me/tim_kgnz" },
       { label: "email", value: "tim.kgnz@gmail.com", url: "mailto:tim.kgnz@gmail.com" },
@@ -1125,7 +1124,6 @@ function render(lang){
 
   // contact
   document.getElementById('contactHeading').textContent = DATA.contactHeading;
-  document.getElementById('contactIntro').textContent = DATA.contactIntro;
   const contactGrid = document.getElementById('contactGrid');
   clear(contactGrid);
   DATA.contacts.forEach(c => {
