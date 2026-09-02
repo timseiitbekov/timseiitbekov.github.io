@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Tim Seiitbekov - SDET | QA Automation Engineer</title>
+<meta id="pageDescription" name="description" content="Tim Seiitbekov - Senior QA Automation Engineer | SDET, 5+ years in fintech and e-commerce test automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
+  :root{
+    --bg: #F7F3EE;
+    --panel: #FFFDFB;
+    --line: #E4DACF;
+    --line-soft: #ECE3D8;
+    --text: #2A1F22;
+    --muted: #7C6F68;
+    --muted-dim: #A99C93;
+    --signal: #7C2434;
+    --signal-dim: rgba(124, 36, 52, .10);
+    --accent2: #B5495A;
+    --radius: 3px;
+    --font-display: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+    --content-max: 720px;
+    --rail-w: 52px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============================================================
+     BACKGROUND BLOBS — decorative, fixed to viewport, non-interactive
+     ============================================================ */
+  .bg-blobs{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .blob{ position: absolute; filter: blur(70px); }
+  .blob--a{
+    width: 46vw; height: 46vw; max-width: 560px; max-height: 560px;
+    top: -12vh; right: -10vw;
+    background: radial-gradient(circle at 35% 35%, rgba(124,36,52,.22), rgba(124,36,52,0) 70%);
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  }
+  .blob--b{
+    width: 34vw; height: 34vw; max-width: 420px; max-height: 420px;
+    bottom: -8vh; left: -8vw;
+    background: radial-gradient(circle at 60% 40%, rgba(181,73,90,.20), rgba(181,73,90,0) 70%);
+    border-radius: 60% 40% 35% 65% / 55% 45% 55% 45%;
+  }
+  .blob--c{
+    width: 20vw; height: 20vw; max-width: 260px; max-height: 260px;
+    top: 38%; right: 4vw;
+    background: radial-gradient(circle at 50% 50%, rgba(124,36,52,.15), rgba(124,36,52,0) 70%);
+    border-radius: 35% 65% 55% 45% / 40% 60% 40% 60%;
+  }
+
+  a{ color: inherit; }
+  ::selection{ background: var(--signal); color: #FBEEF1; }
+
+  :focus-visible{
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ============================================================
+     LAYOUT PRIMITIVES
+     ============================================================ */
+  .wrap{
+    max-width: calc(var(--content-max) + var(--rail-w) + 24px);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  section{
+    display: grid;
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    gap: 24px;
+    padding: 72px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .rail{
+    position: relative;
+  }
+  .rail span{
+    position: sticky;
+    top: 96px;
+    display: inline-block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--muted-dim);
+  }
+
+  h2.heading{
+    font-size: 13px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    margin: 0 0 28px;
+    font-weight: 400;
+  }
+
+  @media (max-width: 640px){
+    section{ grid-template-columns: 1fr; padding: 48px 0; }
+    .rail{ display: none; }
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(247,243,238,.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  header .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 64px;
+  }
+  .brand{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: .02em;
+    flex: none;
+  }
+  .brand em{
+    color: var(--signal);
+    font-style: normal;
+  }
+  nav{
+    display: flex;
+    gap: 28px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar{ display: none; }
+  nav a{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    padding: 4px 0;
+  }
+  nav a::after{
+    content: '';
+    position: absolute;
+    left: 0; right: 100%;
+    bottom: -1px;
+    height: 1px;
+    background: var(--signal);
+    transition: right .2s ease;
+  }
+  nav a.active{ color: var(--text); }
+  nav a.active::after{ right: 0; }
+
+  .header-right{ display: flex; align-items: center; gap: 22px; min-width: 0; flex: 1; justify-content: flex-end; }
+
+  .lang-switch{
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    flex: none;
+  }
+  .lang-switch button{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .03em;
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .lang-switch button + button{ border-left: 1px solid var(--line); }
+  .lang-switch button.active{ background: var(--signal); color: #FBEEF1; }
+  .lang-switch button:hover:not(.active){ color: var(--text); }
+
+  @media (max-width: 560px){
+    nav{ gap: 16px; }
+    nav a{ font-size: 12px; }
+    .header-right{ gap: 14px; }
+  }
+
+  /* ============================================================
+     HERO / ABOUT
+     ============================================================ */
+  .about-inner{
+    display: flex;
+    align-items: flex-start;
+  }
+  .about-text{ min-width: 0; }
+
+  .name{
+    font-size: clamp(28px, 4.4vw, 40px);
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: -.01em;
+  }
+  .meta-line{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+  .meta-line span:not(:last-child)::after{
+    content: '/';
+    margin: 0 10px;
+    color: var(--muted-dim);
+  }
+  .bio{
+    max-width: 58ch;
+    color: var(--text);
+    font-size: 16px;
+    margin: 0 0 32px;
+  }
+
+  .stats{
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .stat{
+    border-left: 2px solid var(--signal);
+    padding-left: 12px;
+  }
+  .stat:nth-child(2){ border-left-color: var(--accent2); }
+  .stat b{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .stat span{
+    display: block;
+    font-size: 12.5px;
+    color: var(--muted);
+    max-width: 16ch;
+    margin-top: 2px;
+  }
+
+  .cta-row{ display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .btn--primary{
+    background: var(--signal);
+    color: #FBEEF1;
+    font-weight: 500;
+  }
+  .btn--primary:hover{ background: #611D2A; }
+  .btn--ghost{
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .btn--ghost:hover{ border-color: var(--signal); }
+
+  /* load-in sequence: a single orchestrated moment, hero only */
+  .about-inner .name,
+  .about-inner .meta-line,
+  .about-inner .bio,
+  .about-inner .stats,
+  .about-inner .cta-row{
+    opacity: 0;
+    animation: rise .5s ease forwards;
+  }
+  .about-inner .name{ animation-delay: .02s; }
+  .about-inner .meta-line{ animation-delay: .14s; }
+  .about-inner .bio{ animation-delay: .2s; }
+  .about-inner .stats{ animation-delay: .26s; }
+  .about-inner .cta-row{ animation-delay: .32s; }
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(8px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 560px){
+    .about-inner{ flex-direction: column; }
+  }
+
+  /* ============================================================
+     STACK
+     ============================================================ */
+  .skill-group{ margin-bottom: 22px; }
+  .skill-group:last-child{ margin-bottom: 0; }
+  .skill-group-label{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+    margin-bottom: 10px;
+  }
+  .chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    padding: 6px 11px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--muted);
+    background: var(--panel);
+  }
+
+  /* ============================================================
+     PROJECTS
+     ============================================================ */
+  .projects-intro{
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+  .project-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .project-card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    padding: 18px 18px 16px;
+    text-decoration: none;
+    transition: border-color .15s ease;
+  }
+  .project-card:hover{ border-color: var(--signal); }
+  .project-card-top{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .project-lang{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+    color: var(--signal);
+    text-transform: uppercase;
+  }
+  .project-name{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+    word-break: break-word;
+  }
+  .project-tools{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+  }
+  .project-tool{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--muted);
+    background: var(--bg);
+  }
+  .project-link{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .project-card:hover .project-link{ color: var(--signal); }
+  @media (max-width: 760px){
+    .project-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     EXPERIENCE
+     ============================================================ */
+  .exp-toolbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 22px;
+  }
+  .exp-toggle{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .exp-toggle:hover{ color: var(--signal); }
+
+  .exp-item{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .exp-item summary{
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .exp-item summary::-webkit-details-marker{ display: none; }
+  .exp-head-left{ min-width: 0; }
+  .exp-company{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+  .exp-role{
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .exp-period{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+    white-space: nowrap;
+    flex: none;
+    padding-top: 2px;
+  }
+  .exp-item[open] summary{ border-bottom: 1px solid var(--line); }
+  .exp-item summary .caret{
+    display: none;
+  }
+  .exp-body{
+    padding: 4px 20px 20px;
+  }
+  .exp-body ul{
+    margin: 0;
+    padding-left: 18px;
+  }
+  .exp-body li{
+    margin-bottom: 8px;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+  .exp-body li:last-child{ margin-bottom: 0; }
+
+  @media (max-width: 560px){
+    .exp-item summary{ flex-wrap: wrap; row-gap: 6px; }
+    .exp-period{ white-space: normal; flex: 1 1 100%; }
+  }
+
+  /* ============================================================
+     BACKGROUND (education / languages)
+     ============================================================ */
+  .bg-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .bg-block-label{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+    margin-bottom: 10px;
+  }
+  .bg-block p{ margin: 0 0 4px; font-size: 14.5px; }
+  .bg-block p.sub{ color: var(--muted); font-size: 13px; }
+  @media (max-width: 560px){
+    .bg-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     CONTACT
+     ============================================================ */
+  .contact-intro{
+    max-width: 52ch;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+  .contact-grid{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .contact-card{
+    flex: 1 1 180px;
+    background: var(--panel);
+    padding: 18px 20px;
+    text-decoration: none;
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    margin-left: -1px;
+    margin-top: -1px;
+    transition: background .15s ease;
+  }
+  .contact-card:hover{ background: #F1E7DF; }
+  .contact-card-label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted-dim);
+    margin-bottom: 6px;
+  }
+  .contact-card-value{
+    display: block;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+
+  footer{
+    padding: 32px 0 48px;
+  }
+  footer .wrap{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blobs" aria-hidden="true">
+  <div class="blob blob--a"></div>
+  <div class="blob blob--b"></div>
+  <div class="blob blob--c"></div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a href="#about" class="brand">TS<em>.</em></a>
+    <div class="header-right">
+      <nav id="nav"></nav>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="ru">RU</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="rail"><span id="railAbout"></span></div>
+    <div class="about-inner">
+      <div class="about-text">
+        <h1 class="name" id="name"></h1>
+        <div class="meta-line" id="metaLine"></div>
+        <p class="bio" id="bio"></p>
+        <div class="stats" id="stats"></div>
+        <div class="cta-row" id="ctaRow"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="rail"><span id="railStack"></span></div>
+    <div>
+      <h2 class="heading" id="stackHeading"></h2>
+      <div id="skillGroups"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="rail"><span id="railExperience"></span></div>
+    <div>
+      <div class="exp-toolbar">
+        <h2 class="heading" style="margin:0" id="experienceHeading"></h2>
+        <button class="exp-toggle" id="expToggle" type="button"></button>
+      </div>
+      <div id="expList"></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="rail"><span id="railProjects"></span></div>
+    <div>
+      <h2 class="heading" id="projectsHeading"></h2>
+      <p class="projects-intro" id="projectsIntro"></p>
+      <div class="project-grid" id="projectGrid"></div>
+    </div>
+  </section>
+
+  <section id="background">
+    <div class="rail"><span id="railBackground"></span></div>
+    <div class="bg-grid">
+      <div class="bg-block">
+        <div class="bg-block-label" id="educationLabel"></div>
+        <div id="education"></div>
+      </div>
+      <div class="bg-block">
+        <div class="bg-block-label" id="languagesLabel"></div>
+        <div id="languages"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="rail"><span id="railContact"></span></div>
+    <div>
+      <h2 class="heading" id="contactHeading"></h2>
+      <p class="contact-intro" id="contactIntro"></p>
+      <div class="contact-grid" id="contactGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" id="footerText"></div>
+</footer>
+
+<script>
+/* ==================================================================
+   EDIT YOUR DATA HERE — everything on the page is generated from
+   this one object, once per language. Change text below, save,
+   refresh the page. No other part of the file needs to be touched
+   for content edits.
+   ================================================================== */
+const CONTENT = {
+  en: {
+    metaTitle: "Tim Seiitbekov - SDET | QA Automation Engineer",
+    metaDescription: "Tim Seiitbekov - Senior QA Automation Engineer | SDET, 5+ years in fintech and e-commerce test automation.",
+
+    nav: [
+      { href: "#about", label: "about" },
+      { href: "#stack", label: "stack" },
+      { href: "#experience", label: "experience" },
+      { href: "#projects", label: "projects" },
+      { href: "#contact", label: "contact" }
+    ],
+    rail: { about: "about", stack: "stack", projects: "projects", experience: "experience", background: "background", contact: "contact" },
+
+    name: "Tim Seiitbekov",
+    role: "SDET | QA Automation Engineer",
+    location: "Kyrgyzstan · Remote",
+    experienceYears: "5+ years",
+
+    bio: "SDET | QA Automation Engineer with 5+ years across fintech and e-commerce - from algorithmic trading platforms to banking systems. I build test automation infrastructure from the ground up, scale QA practices in high-stakes environments, and mentor the engineers who keep it running.",
+
+    stats: [
+      { value: "30–35%", label: "lower bug escape rate" },
+      { value: "-40%", label: "manual regression effort" },
+      { value: "~90%", label: "automated coverage on trading systems" }
+    ],
+
+    primaryCta: { label: "Message on Telegram", url: "https://t.me/tim_kgnz" },
+    secondaryCta: { label: "Email me", url: "mailto:tim.kgnz@gmail.com" },
+    resumeCta: { label: "Download resume", url: "Tim_Seiitbekov_CV_en.pdf", filename: "Tim_Seiitbekov_CV_en.pdf" },
+
+    stackHeading: "Technology stack",
+    skillGroups: [
+      { label: "languages", items: ["Kotlin", "Java", "Golang", "JavaScript/TypeScript"] },
+      { label: "backend & api testing", items: ["REST API", "GraphQL", "gRPC", "Kafka", "WebSocket", "Postman", "PostgreSQL"] },
+      { label: "ui & mobile testing", items: ["Selenium", "Appium", "Playwright", "Cypress", "Espresso", "XCUITest"] },
+      { label: "performance testing", items: ["Gatling", "JMeter"] },
+      { label: "ci/cd & devops", items: ["GitLab CI/CD", "Jenkins", "Docker"] },
+      { label: "frameworks & libraries", items: ["JUnit", "TestNG", "Cucumber", "Spring", "Maven", "Gradle"] },
+      { label: "reporting & test management", items: ["Allure TestOps", "Jira", "Confluence"] }
+    ],
+
+    projectsHeading: "Open-source test framework templates",
+    projectsIntro: "Three from-scratch API test automation templates for Spring PetClinic REST, each with the same layered architecture (client → service → steps → tests), CRUD and negative-path coverage, and Allure reporting - one template per stack, so the same patterns are easy to compare across Java, Go, and TypeScript.",
+    projects: [
+      {
+        lang: "Java",
+        name: "petclinic-tests",
+        tools: ["Java 17", "Gradle", "JUnit 5", "RestAssured", "AssertJ", "Allure"],
+        url: "https://github.com/timseiitbekov/petclinic-tests"
+      },
+      {
+        lang: "Go",
+        name: "petclinic-tests-go",
+        tools: ["Go 1.24+", "testify/suite", "resty", "gofakeit"],
+        url: "https://github.com/timseiitbekov/petclinic-tests-go"
+      },
+      {
+        lang: "TypeScript",
+        name: "petclinic-tests-ts",
+        tools: ["Node 24", "TypeScript 5.7", "Playwright Test", "Allure"],
+        url: "https://github.com/timseiitbekov/petclinic-tests-ts"
+      }
+    ],
+    projectLinkLabel: "View on GitHub →",
+
+    experienceHeading: "Experience",
+    expandLabel: "expand all",
+    collapseLabel: "collapse all",
+    experience: [
+      {
+        company: "Sense",
+        role: "Senior AQA Engineer",
+        period: "Apr 2025 - Jun 2026",
+        open: true,
+        bullets: [
+          "Maintained and executed ongoing regression testing across backend, UI, and mobile platforms",
+          "Conducted regular code reviews, ensuring adherence to clean code standards and best practices",
+          "Refactored legacy test code and updated outdated dependencies, improving framework stability and maintainability",
+          "Built automated test suites for algorithmic trading, achieving ~90% coverage",
+          "Monitored 3+ exchange and gateway integrations, maintaining 99.9% uptime during trading sessions",
+          "Structured team knowledge repository, improving new engineer onboarding experience",
+          "Reviewed and approved test deployment code, enforcing quality standards across backend, web, and mobile",
+          "Continuously selected high-value test cases for automation, ensuring maximum coverage and regression confidence",
+          "Designed LLM output validation tests covering schema correctness and hallucination detection"
+        ]
+      },
+      {
+        company: "Bakai Bank",
+        role: "Lead / Senior AQA Engineer",
+        period: "Oct 2024 - Apr 2025",
+        bullets: [
+          "Built automation framework from scratch across 3+ projects, scaling coverage from 0 to 70%+ automated regression",
+          "Implemented CI/CD pipelines with test reporting, cutting commit-to-result feedback time by ~50%",
+          "Led and mentored 4 QA engineers, improving sprint delivery consistency by ~25%",
+          "Identified high-risk untested scenarios per feature through requirements analysis and risk assessment",
+          "Reduced post-release critical bugs by ~35% through structured test planning and strategy",
+          "Tested LLM tool-calling accuracy across 20+ scenarios, validating API selection and fallback behavior"
+        ]
+      },
+      {
+        company: "Noveo Group",
+        role: "Middle+ AQA Engineer",
+        period: "Oct 2021 - Aug 2023, Dec 2023 - Oct 2024",
+        bullets: [
+          "Built scalable automation frameworks across 4+ projects, cutting new project setup time by ~60%",
+          "Automated 300+ API endpoints, reducing regression cycle from ~4 hours to under 2 hours",
+          "Reduced UI test flakiness, significantly improving CI pipeline reliability",
+          "Mentored 2–3 junior engineers and successfully onboarded them to active teams",
+          "Maintained full test-to-requirement traceability across all active sprints"
+        ]
+      },
+      {
+        company: "Tinkoff Bank",
+        role: "AQA Engineer Middle+",
+        period: "Aug 2023 - Nov 2023",
+        bullets: [
+          "Executed backend testing focused on data integrity, catching critical defects before production release",
+          "Optimized existing test frameworks, improving overall execution speed and CI reliability",
+          "Expanded API automation coverage by 15% within first 2 months of joining",
+          "Standardized test documentation templates, reducing per-feature documentation effort across the team"
+        ]
+      }
+    ],
+
+    educationLabel: "education",
+    education: [
+      { title: "New Zealand Diploma in Information Technology and Systems Administration", org: "Aspire2International", period: "Nov 2017 - Jun 2019" }
+    ],
+
+    languagesLabel: "languages",
+    languages: [
+      { name: "English", level: "Advanced, fluent speaker" },
+      { name: "Russian", level: "Native, full proficiency" }
+    ],
+
+    contactHeading: "Get in touch",
+    contactIntro: "Reach out about AQA / SDET roles, or automation projects in fintech and e-commerce.",
+    contacts: [
+      { label: "telegram", value: "@tim_kgnz", url: "https://t.me/tim_kgnz" },
+      { label: "email", value: "tim.kgnz@gmail.com", url: "mailto:tim.kgnz@gmail.com" },
+      { label: "whatsapp", value: "+996 222 049240", url: "https://wa.me/996222049240" },
+      { label: "linkedin", value: "tim-seiitbekov", url: "https://www.linkedin.com/in/tim-seiitbekov/" },
+      { label: "github", value: "timseiitbekov", url: "https://github.com/timseiitbekov" }
+    ],
+
+    footerNote: "Built with plain HTML/CSS/JS."
+  },
+
+  ru: {
+    metaTitle: "Тим Сейитбеков - SDET | QA Automation Engineer",
+    metaDescription: "Тим Сейитбеков - Senior QA Automation Engineer / SDET, 5+ лет опыта автоматизации тестирования в финтехе и e-commerce.",
+
+    nav: [
+      { href: "#about", label: "обо мне" },
+      { href: "#stack", label: "стек" },
+      { href: "#experience", label: "опыт" },
+      { href: "#projects", label: "проекты" },
+      { href: "#contact", label: "контакты" }
+    ],
+    rail: { about: "обо мне", stack: "стек", projects: "проекты", experience: "опыт", background: "образование", contact: "контакты" },
+
+    name: "Tim Seiitbekov",
+    role: "SDET | QA Automation Engineer",
+    location: "Кыргызстан · Удалённо",
+    experienceYears: "5+ лет",
+
+    bio: "Старший инженер по автоматизации тестирования (SDET | QA Automation Engineer) с опытом более 5 лет в финтехе и электронной коммерции - от платформ алгоритмической торговли до банковских систем. Строю тестовую инфраструктуру с нуля, масштабирую практики QA в средах с высокими требованиями к надёжности и наставляю инженеров, которые всё это поддерживают.",
+
+    stats: [
+      { value: "30-35%", label: "снижение доли пропущенных дефектов" },
+      { value: "-40%", label: "меньше трудозатрат на ручную регрессию" },
+      { value: "~90%", label: "автоматизированное покрытие торговых систем" }
+    ],
+
+    primaryCta: { label: "Написать в Telegram", url: "https://t.me/tim_kgnz" },
+    secondaryCta: { label: "Написать на почту", url: "mailto:tim.kgnz@gmail.com" },
+    resumeCta: { label: "Скачать резюме", url: "Tim_Seiitbekov_CV_ru.pdf", filename: "Tim_Seiitbekov_CV_ru.pdf" },
+
+    stackHeading: "Технологический стек",
+    skillGroups: [
+      { label: "языки", items: ["Kotlin", "Java", "Golang", "JavaScript/TypeScript"] },
+      { label: "бэкенд и api-тестирование", items: ["REST API", "GraphQL", "gRPC", "Kafka", "WebSocket", "Postman", "PostgreSQL"] },
+      { label: "ui и мобильное тестирование", items: ["Selenium", "Appium", "Playwright", "Cypress", "Espresso", "XCUITest"] },
+      { label: "нагрузочное тестирование", items: ["Gatling", "JMeter"] },
+      { label: "ci/cd и devops", items: ["GitLab CI/CD", "Jenkins", "Docker"] },
+      { label: "фреймворки и библиотеки", items: ["JUnit", "TestNG", "Cucumber", "Spring", "Maven", "Gradle"] },
+      { label: "отчётность и управление тестированием", items: ["Allure TestOps", "Jira", "Confluence"] }
+    ],
+
+    projectsHeading: "Шаблоны тест-фреймворков (open source)",
+    projectsIntro: "Три шаблона API-автотестов для Spring PetClinic REST с нуля: одна и та же слоистая архитектура (client → service → steps → tests), покрытие CRUD и негативных сценариев, отчёты Allure — по шаблону на каждый стек, чтобы одинаковые паттерны было легко сравнить на Java, Go и TypeScript.",
+    projects: [
+      {
+        lang: "Java",
+        name: "petclinic-tests",
+        tools: ["Java 17", "Gradle", "JUnit 5", "RestAssured", "AssertJ", "Allure"],
+        url: "https://github.com/timseiitbekov/petclinic-tests"
+      },
+      {
+        lang: "Go",
+        name: "petclinic-tests-go",
+        tools: ["Go 1.24+", "testify/suite", "resty", "gofakeit"],
+        url: "https://github.com/timseiitbekov/petclinic-tests-go"
+      },
+      {
+        lang: "TypeScript",
+        name: "petclinic-tests-ts",
+        tools: ["Node 24", "TypeScript 5.7", "Playwright Test", "Allure"],
+        url: "https://github.com/timseiitbekov/petclinic-tests-ts"
+      }
+    ],
+    projectLinkLabel: "Открыть на GitHub →",
+
+    experienceHeading: "Опыт работы",
+    expandLabel: "развернуть всё",
+    collapseLabel: "свернуть всё",
+    experience: [
+      {
+        company: "Sense",
+        role: "Senior AQA Engineer",
+        period: "Apr 2025 - Jun 2026",
+        open: true,
+        bullets: [
+          "Поддерживал регрессионное тестирование бэкенда, UI и мобильных платформ",
+          "Проводил код-ревью на соответствие стандартам чистого кода",
+          "Рефакторил тестовый код и обновлял зависимости, повышая стабильность фреймворка",
+          "Разработал автотесты для алгоритмической торговли с покрытием ~90%",
+          "Мониторил интеграции с 3+ биржами, поддерживая uptime 99,9% во время торговых сессий",
+          "Структурировал базу знаний команды для ускорения онбординга",
+          "Проверял и утверждал код деплоя тестов на бэкенде, вебе и мобильных платформах",
+          "Отбирал наиболее ценные тест-кейсы для автоматизации",
+          "Разработал тесты валидации LLM-выходов: корректность схемы и обнаружение галлюцинаций"
+        ]
+      },
+      {
+        company: "Bakai Bank",
+        role: "Lead / Senior AQA Engineer",
+        period: "Oct 2024 - Apr 2025",
+        bullets: [
+          "Построил фреймворк автоматизации с нуля для 3+ проектов, доведя покрытие регрессии до 70%+",
+          "Внедрил CI/CD пайплайны с отчётностью по тестам, ускорив обратную связь от коммита до результата примерно на 50%",
+          "Руководил и наставлял команду из 4 QA-инженеров, повысив стабильность спринтов примерно на 25%",
+          "Выявлял высокорисковые непокрытые сценарии через анализ требований и оценку рисков",
+          "Снизил количество критических багов после релиза примерно на 35% за счёт структурированного тест-планирования",
+          "Тестировал точность tool calling у LLM в 20+ сценариях, проверяя выбор API и fallback-логику"
+        ]
+      },
+      {
+        company: "Noveo Group",
+        role: "Middle+ AQA Engineer",
+        period: "Oct 2021 - Aug 2023, Dec 2023 - Oct 2024",
+        bullets: [
+          "Построил масштабируемые фреймворки автоматизации для 4+ проектов, сократив время настройки нового проекта примерно на 60%",
+          "Автоматизировал 300+ API-эндпоинтов, сократив цикл регрессии с ~4 часов до менее чем 2 часов",
+          "Значительно снизил нестабильность (flakiness) UI-тестов, повысив надёжность CI-пайплайна",
+          "Наставлял 2–3 junior-инженеров, успешно введя их в рабочие команды",
+          "Поддерживал полную трассируемость тестов к требованиям во всех активных спринтах"
+        ]
+      },
+      {
+        company: "Tinkoff Bank",
+        role: "AQA Engineer Middle+",
+        period: "Aug 2023 - Nov 2023",
+        bullets: [
+          "Выполнял бэкенд-тестирование с фокусом на целостность данных, выявляя критические дефекты до релиза в продакшн",
+          "Оптимизировал существующие тестовые фреймворки, повысив скорость выполнения и надёжность CI",
+          "Расширил покрытие API-автоматизацией на 15% в первые 2 месяца работы",
+          "Стандартизировал шаблоны тестовой документации, сократив трудозатраты команды на документирование фич"
+        ]
+      }
+    ],
+
+    educationLabel: "образование",
+    education: [
+      { title: "New Zealand Diploma in Information Technology and Systems Administration", org: "Aspire2International", period: "Nov 2017 - Jun 2019" }
+    ],
+
+    languagesLabel: "языки",
+    languages: [
+      { name: "Английский", level: "продвинутый уровень, свободное владение" },
+      { name: "Русский", level: "родной язык, полное владение" }
+    ],
+
+    contactHeading: "Связаться",
+    contactIntro: "Пишите по вопросам AQA / SDET вакансий или проектов автоматизации в финтехе и e-commerce.",
+    contacts: [
+      { label: "telegram", value: "@tim_kgnz", url: "https://t.me/tim_kgnz" },
+      { label: "email", value: "tim.kgnz@gmail.com", url: "mailto:tim.kgnz@gmail.com" },
+      { label: "whatsapp", value: "+996 222 049240", url: "https://wa.me/996222049240" },
+      { label: "linkedin", value: "tim-seiitbekov", url: "https://www.linkedin.com/in/tim-seiitbekov/" },
+      { label: "github", value: "timseiitbekov", url: "https://github.com/timseiitbekov" }
+    ],
+
+    footerNote: "Сделано на чистых HTML/CSS/JS."
+  }
+};
+/* ================== END OF EDITABLE DATA =========================== */
+
+
+/* ==================================================================
+   RENDERING — reads CONTENT[lang] above and fills the page.
+   No edits needed here for normal content changes.
+   ================================================================== */
+function el(tag, opts = {}, children = []){
+  const e = document.createElement(tag);
+  if (opts.class) e.className = opts.class;
+  if (opts.text) e.textContent = opts.text;
+  if (opts.html) e.innerHTML = opts.html;
+  if (opts.href) e.href = opts.href;
+  if (opts.attrs) for (const [k,v] of Object.entries(opts.attrs)) e.setAttribute(k, v);
+  children.forEach(c => e.appendChild(c));
+  return e;
+}
+
+function clear(elm){ while (elm.firstChild) elm.removeChild(elm.firstChild); }
+
+let spy = null;
+let currentLang = 'en';
+
+function render(lang){
+  const DATA = CONTENT[lang];
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('pageTitle').textContent = DATA.metaTitle;
+  document.getElementById('pageDescription').setAttribute('content', DATA.metaDescription);
+
+  // lang switch buttons
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  // nav
+  const navEl = document.getElementById('nav');
+  clear(navEl);
+  DATA.nav.forEach(n => navEl.appendChild(el('a', { href: n.href, text: n.label })));
+
+  // rail labels
+  document.getElementById('railAbout').textContent = DATA.rail.about;
+  document.getElementById('railStack').textContent = DATA.rail.stack;
+  document.getElementById('railProjects').textContent = DATA.rail.projects;
+  document.getElementById('railExperience').textContent = DATA.rail.experience;
+  document.getElementById('railBackground').textContent = DATA.rail.background;
+  document.getElementById('railContact').textContent = DATA.rail.contact;
+
+  // hero
+  document.getElementById('name').textContent = DATA.name;
+
+  const meta = document.getElementById('metaLine');
+  clear(meta);
+  [DATA.role, DATA.location, DATA.experienceYears].forEach(t => {
+    meta.appendChild(el('span', { text: t }));
+  });
+
+  document.getElementById('bio').textContent = DATA.bio;
+
+  const statsEl = document.getElementById('stats');
+  clear(statsEl);
+  DATA.stats.forEach(s => {
+    statsEl.appendChild(el('div', { class: 'stat' }, [
+      el('b', { text: s.value }),
+      el('span', { text: s.label })
+    ]));
+  });
+
+  const ctaEl = document.getElementById('ctaRow');
+  clear(ctaEl);
+  ctaEl.appendChild(el('a', { class: 'btn btn--primary', href: DATA.primaryCta.url, text: DATA.primaryCta.label, attrs: { target: '_blank', rel: 'noopener' } }));
+  ctaEl.appendChild(el('a', { class: 'btn btn--ghost', href: DATA.secondaryCta.url, text: DATA.secondaryCta.label }));
+  ctaEl.appendChild(el('a', { class: 'btn btn--ghost', href: DATA.resumeCta.url, text: DATA.resumeCta.label, attrs: { download: DATA.resumeCta.filename } }));
+
+  // stack
+  document.getElementById('stackHeading').textContent = DATA.stackHeading;
+  const skillWrap = document.getElementById('skillGroups');
+  clear(skillWrap);
+  DATA.skillGroups.forEach(g => {
+    const chips = el('div', { class: 'chips' });
+    g.items.forEach(item => chips.appendChild(el('span', { class: 'chip', text: item })));
+    skillWrap.appendChild(el('div', { class: 'skill-group' }, [
+      el('div', { class: 'skill-group-label', text: g.label }),
+      chips
+    ]));
+  });
+
+  // projects
+  document.getElementById('projectsHeading').textContent = DATA.projectsHeading;
+  document.getElementById('projectsIntro').textContent = DATA.projectsIntro;
+  const projectGrid = document.getElementById('projectGrid');
+  clear(projectGrid);
+  DATA.projects.forEach(p => {
+    const tools = el('div', { class: 'project-tools' });
+    p.tools.forEach(t => tools.appendChild(el('span', { class: 'project-tool', text: t })));
+    projectGrid.appendChild(el('a', { class: 'project-card', href: p.url, attrs: { target: '_blank', rel: 'noopener' } }, [
+      el('div', { class: 'project-card-top' }, [
+        el('p', { class: 'project-name', text: p.name }),
+        el('span', { class: 'project-lang', text: p.lang })
+      ]),
+      tools,
+      el('div', { class: 'project-link', text: DATA.projectLinkLabel })
+    ]));
+  });
+
+  // experience
+  document.getElementById('experienceHeading').textContent = DATA.experienceHeading;
+  const expList = document.getElementById('expList');
+  clear(expList);
+  DATA.experience.forEach(job => {
+    const ul = el('ul');
+    job.bullets.forEach(b => ul.appendChild(el('li', { text: b })));
+    const details = el('details', { class: 'exp-item', attrs: job.open ? { open: '' } : {} }, [
+      el('summary', {}, [
+        el('div', { class: 'exp-head-left' }, [
+          el('p', { class: 'exp-company', text: job.company }),
+          el('p', { class: 'exp-role', text: job.role })
+        ]),
+        el('div', { class: 'exp-period', text: job.period })
+      ]),
+      el('div', { class: 'exp-body' }, [ul])
+    ]);
+    expList.appendChild(details);
+  });
+
+  const expToggle = document.getElementById('expToggle');
+  expToggle.textContent = DATA.expandLabel;
+  expToggle.onclick = function(){
+    const items = document.querySelectorAll('.exp-item');
+    const anyClosed = [...items].some(i => !i.open);
+    items.forEach(i => i.open = anyClosed);
+    this.textContent = anyClosed ? CONTENT[currentLang].collapseLabel : CONTENT[currentLang].expandLabel;
+  };
+
+  // background
+  document.getElementById('educationLabel').textContent = DATA.educationLabel;
+  const eduEl = document.getElementById('education');
+  clear(eduEl);
+  DATA.education.forEach(e => {
+    eduEl.appendChild(el('p', { text: e.title }));
+    eduEl.appendChild(el('p', { class: 'sub', text: `${e.org} · ${e.period}` }));
+  });
+
+  document.getElementById('languagesLabel').textContent = DATA.languagesLabel;
+  const langEl = document.getElementById('languages');
+  clear(langEl);
+  DATA.languages.forEach(l => {
+    langEl.appendChild(el('p', { text: l.name }));
+    langEl.appendChild(el('p', { class: 'sub', text: l.level }));
+  });
+
+  // contact
+  document.getElementById('contactHeading').textContent = DATA.contactHeading;
+  document.getElementById('contactIntro').textContent = DATA.contactIntro;
+  const contactGrid = document.getElementById('contactGrid');
+  clear(contactGrid);
+  DATA.contacts.forEach(c => {
+    contactGrid.appendChild(el('a', { class: 'contact-card', href: c.url, attrs: { target: '_blank', rel: 'noopener' } }, [
+      el('span', { class: 'contact-card-label', text: c.label }),
+      el('span', { class: 'contact-card-value', text: c.value })
+    ]));
+  });
+
+  document.getElementById('footerText').textContent = `© ${new Date().getFullYear()} ${DATA.name}. ${DATA.footerNote}`;
+
+  // scroll-spy nav (rebind — nav links are re-created per render)
+  if (spy) spy.disconnect();
+  const navLinks = [...document.querySelectorAll('#nav a')];
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+  spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && spy.observe(s));
+}
+
+function setLang(lang){
+  try { localStorage.setItem('cvLang', lang); } catch (e) {}
+  render(lang);
+}
+
+document.querySelectorAll('#langSwitch button').forEach(b => {
+  b.addEventListener('click', () => setLang(b.dataset.lang));
+});
+
+let initialLang = 'en';
+try {
+  const saved = localStorage.getItem('cvLang');
+  if (saved && CONTENT[saved]) {
+    initialLang = saved;
+  } else if (navigator.language && navigator.language.toLowerCase().startsWith('ru')) {
+    initialLang = 'ru';
+  }
+} catch (e) {}
+
+render(initialLang);
+</script>
+
+</body>
+</html>
