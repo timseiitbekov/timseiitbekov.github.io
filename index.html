@@ -97,13 +97,16 @@
   }
 
   section{
-    display: grid;
-    grid-template-columns: var(--rail-w) minmax(0, 1fr);
-    gap: 24px;
-    padding: 72px 0;
     border-bottom: 1px solid var(--line-soft);
   }
   section:last-of-type{ border-bottom: none; }
+  section > .wrap{
+    display: grid;
+    grid-template-columns: var(--rail-w) minmax(0, 1fr);
+    gap: 24px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
 
   .rail{
     position: relative;
@@ -129,7 +132,7 @@
   }
 
   @media (max-width: 640px){
-    section{ grid-template-columns: 1fr; padding: 48px 20px; }
+    section > .wrap{ grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 48px; }
     .rail{ display: none; }
   }
 
@@ -605,65 +608,77 @@
 <main>
 
   <section id="about">
-    <div class="rail"><span id="railAbout"></span></div>
-    <div class="about-inner">
-      <div class="about-text">
-        <h1 class="name" id="name"></h1>
-        <div class="meta-line" id="metaLine"></div>
-        <p class="bio" id="bio"></p>
-        <div class="stats" id="stats"></div>
-        <div class="cta-row" id="ctaRow"></div>
+    <div class="wrap">
+      <div class="rail"><span id="railAbout"></span></div>
+      <div class="about-inner">
+        <div class="about-text">
+          <h1 class="name" id="name"></h1>
+          <div class="meta-line" id="metaLine"></div>
+          <p class="bio" id="bio"></p>
+          <div class="stats" id="stats"></div>
+          <div class="cta-row" id="ctaRow"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="stack">
-    <div class="rail"><span id="railStack"></span></div>
-    <div>
-      <h2 class="heading" id="stackHeading"></h2>
-      <div id="skillGroups"></div>
+    <div class="wrap">
+      <div class="rail"><span id="railStack"></span></div>
+      <div>
+        <h2 class="heading" id="stackHeading"></h2>
+        <div id="skillGroups"></div>
+      </div>
     </div>
   </section>
 
   <section id="experience">
-    <div class="rail"><span id="railExperience"></span></div>
-    <div>
-      <div class="exp-toolbar">
-        <h2 class="heading" style="margin:0" id="experienceHeading"></h2>
-        <button class="exp-toggle" id="expToggle" type="button"></button>
+    <div class="wrap">
+      <div class="rail"><span id="railExperience"></span></div>
+      <div>
+        <div class="exp-toolbar">
+          <h2 class="heading" style="margin:0" id="experienceHeading"></h2>
+          <button class="exp-toggle" id="expToggle" type="button"></button>
+        </div>
+        <div id="expList"></div>
       </div>
-      <div id="expList"></div>
     </div>
   </section>
 
   <section id="projects">
-    <div class="rail"><span id="railProjects"></span></div>
-    <div>
-      <h2 class="heading" id="projectsHeading"></h2>
-      <p class="projects-intro" id="projectsIntro"></p>
-      <div class="project-grid" id="projectGrid"></div>
+    <div class="wrap">
+      <div class="rail"><span id="railProjects"></span></div>
+      <div>
+        <h2 class="heading" id="projectsHeading"></h2>
+        <p class="projects-intro" id="projectsIntro"></p>
+        <div class="project-grid" id="projectGrid"></div>
+      </div>
     </div>
   </section>
 
   <section id="background">
-    <div class="rail"><span id="railBackground"></span></div>
-    <div class="bg-grid">
-      <div class="bg-block">
-        <div class="bg-block-label" id="educationLabel"></div>
-        <div id="education"></div>
-      </div>
-      <div class="bg-block">
-        <div class="bg-block-label" id="languagesLabel"></div>
-        <div id="languages"></div>
+    <div class="wrap">
+      <div class="rail"><span id="railBackground"></span></div>
+      <div class="bg-grid">
+        <div class="bg-block">
+          <div class="bg-block-label" id="educationLabel"></div>
+          <div id="education"></div>
+        </div>
+        <div class="bg-block">
+          <div class="bg-block-label" id="languagesLabel"></div>
+          <div id="languages"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="contact">
-    <div class="rail"><span id="railContact"></span></div>
-    <div>
-      <h2 class="heading" id="contactHeading"></h2>
-      <div class="contact-grid" id="contactGrid"></div>
+    <div class="wrap">
+      <div class="rail"><span id="railContact"></span></div>
+      <div>
+        <h2 class="heading" id="contactHeading"></h2>
+        <div class="contact-grid" id="contactGrid"></div>
+      </div>
     </div>
   </section>
 
